@@ -54,4 +54,7 @@ export default class CommonService {
         form.append("name", "-1");
         return this.http.postAsync(Config.upload, form);
     }
+
+    addContent(param: AddContentParam) {
+    }
 }
