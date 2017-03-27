@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, RequestOptions } from '@angular/http';
+import { RequestOptions } from '@angular/http';
 import { CoolHttp } from 'angular2-cool-http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
@@ -10,13 +10,13 @@ import Config from '../Config';
 @Injectable()
 export default class LoginService {
 
+	private requestOpt = new RequestOptions({
+      withCredentials: true
+    });
+
 	constructor(private http: CoolHttp) {}
 
   	getErCodeURI() {
-  		let headers = new Headers();
-  		headers.append("withcredentials", "true");
-  		return this.http.getAsync(Config.scanView, new RequestOptions({
-  			withCredentials: true
-  		}));
+  		return this.http.getAsync(Config.scanView, this.requestOpt);
   	}
 }

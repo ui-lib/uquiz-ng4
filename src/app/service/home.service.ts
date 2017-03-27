@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { RequestOptions } from '@angular/http';
 import { CoolHttp } from 'angular2-cool-http';
 
 import qs from "qs";
@@ -25,7 +26,9 @@ export default class HomeService extends CommonService {
 	}
 
   	queryList(param: QueryListParam) {
-  		return this.http.getAsync(`${Config.listCourse}?${qs.stringify(param)}`);
+  		return this.http.getAsync(`${Config.listCourse}?${qs.stringify(param)}`, new RequestOptions({
+          withCredentials: true
+      }));
   	}
 }
 

@@ -20,15 +20,21 @@ export class HomeComponent implements OnInit {
 	private size: number = 50;
 	private type: string = "use";
 
-	constructor(private homeService: HomeService, private router: Router) { }
+	constructor(private service: HomeService, private router: Router) { }
 
 	ngOnInit() {
-		this.queryList();
+		this.service.autoLogin().then(() => {
+			this.queryList();
+		}).catch(() => {
+			Alert.error({
+				content: "网络异常, 请刷新浏览器重试!"
+			});
+		});
 	}
 
 	queryList() {
 		const {page, size, type} = this;
-		return this.homeService.queryList({page, size, type});
+		return this.service.queryList({page, size, type});
 	}
 
 }

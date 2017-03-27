@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { RequestOptions } from '@angular/http';
 import { CoolHttp } from 'angular2-cool-http';
 import qs from "qs";
 import 'rxjs/add/operator/catch';
@@ -22,18 +23,15 @@ interface AddContentParam {
 };
 
 @Injectable()
-
 export default class CommonService {
 
-  	constructor(public http: CoolHttp) {
-  	}
+  	constructor(public http: CoolHttp) {}
 
   	autoLogin() {
-  		  let openId = sessionStorage.getItem("openId");
-  		  if (openId === null) {
-    			openId = "123";
-    		}
-		    return this.http.postAsync(`${Config.login}?${qs.stringify({openId})}`);
+  		let openId = sessionStorage.getItem("openId");
+		return this.http.postAsync(`${Config.login}?${qs.stringify({openId})}`, {}, new RequestOptions({
+            withCredentials: true
+        }));
   	}
 
     upload(file: File) {
@@ -52,7 +50,9 @@ export default class CommonService {
         form.append("space", "uquiz_image");
         form.append("owner", "-1");
         form.append("name", "-1");
-        return this.http.postAsync(Config.upload, form);
+        return this.http.postAsync(Config.upload, form, new RequestOptions({
+          withCredentials: true
+      }));
     }
 
     addContent(param: AddContentParam) {

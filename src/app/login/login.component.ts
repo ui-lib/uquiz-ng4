@@ -20,17 +20,18 @@ export class LoginComponent implements OnInit {
     private io: any;
     private stomp: any;
 
-  	constructor(private loginService: LoginService, private router: Router) {
+  	constructor(private service: LoginService, private router: Router) {
   	}
 
   	ngOnInit() {
-  	    this.loginService.getErCodeURI().then((res) => {
+  	    this.service.getErCodeURI().then((res) => {
               this.picURI = Config.picURI(res);
               this.io = new sockjs(Config.scanLogin);
               this.stomp = Stomp.over(this.io);
               this.stomp.connect("guest", "guest", (frame) => {
                     this.stomp.subscribe("/user/queue/notifications", (ret) => {
                         if (ret && ret.body) {
+                            window.sessionStorage.setItem("openId", ret.body);
                             this.router.navigate(["/home"]);
                             this.io.close();
                         } else if (ret.body === "false") {

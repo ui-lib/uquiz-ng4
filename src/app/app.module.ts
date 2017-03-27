@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { Route } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -17,25 +18,25 @@ import { MyComponent } from './my/my.component';
 import { PublishComponent } from './publish/publish.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    HomeComponent,
-    SubjectComponent,
-    DetailComponent,
-    EditComponent,
-    EditorComponent,
-    MyComponent,
-    PublishComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    AppRoutingModule,
-    CoolLoadingIndicatorModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        LoginComponent,
+        HomeComponent,
+        SubjectComponent,
+        DetailComponent,
+        EditComponent,
+        EditorComponent,
+        MyComponent,
+        PublishComponent
+    ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpModule,
+        AppRoutingModule,
+        CoolLoadingIndicatorModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
