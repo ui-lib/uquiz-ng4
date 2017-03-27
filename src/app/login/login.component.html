@@ -1,0 +1,6 @@
+<div class="login-container">
+	<div class="login-center">
+		<img src="../../assets/login/er-code.png" *ngIf="picURI == null" class="er-code" />
+		<img src="../../assets/login/er-code.png" *ngIf="picURI" [src]="picURI" class="er-code" />
+	</div>
+</div>
