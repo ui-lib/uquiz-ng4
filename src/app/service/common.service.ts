@@ -29,11 +29,11 @@ export default class CommonService {
   	}
 
   	autoLogin() {
-  		let openId = sessionStorage.getItem("openId");
-  		if (openId === null) {
-  			openId = "123";
-  		}
-		return this.http.postAsync(`${Config.login}?${qs.stringify({openId})}`);
+  		  let openId = sessionStorage.getItem("openId");
+  		  if (openId === null) {
+    			openId = "123";
+    		}
+		    return this.http.postAsync(`${Config.login}?${qs.stringify({openId})}`);
   	}
 
     upload(file: File) {

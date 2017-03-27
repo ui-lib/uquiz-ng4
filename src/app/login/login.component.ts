@@ -31,8 +31,8 @@ export class LoginComponent implements OnInit {
               this.stomp.connect("guest", "guest", (frame) => {
                     this.stomp.subscribe("/user/queue/notifications", (ret) => {
                         if (ret && ret.body) {
-                            this.io.close();
                             this.router.navigate(["/home"]);
+                            this.io.close();
                         } else if (ret.body === "false") {
                             Alert.error({
                                  title: "错误",
