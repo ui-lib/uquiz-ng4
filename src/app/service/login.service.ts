@@ -11,7 +11,7 @@ import Config from '../Config';
 export default class LoginService {
 
 	private requestOpt = new RequestOptions({
-      withCredentials: true
+    	withCredentials: true
     });
 
 	constructor(private http: CoolHttp) {}

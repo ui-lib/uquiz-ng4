@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+	  nav:string;
+
+	  constructor() {
+		    this.nav = "home";
+	  }
+
+  	navChanged(nav:string) {
+  	  	this.nav = nav;
+  	}
 }

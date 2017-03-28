@@ -29,10 +29,16 @@ export default class CommonService {
 
   	autoLogin() {
   		let openId = sessionStorage.getItem("openId");
-		return this.http.postAsync(`${Config.login}?${qs.stringify({openId})}`, {}, new RequestOptions({
+		return this.http.postAsync(`${Config.login}?${qs.stringify({openId})}`, "", new RequestOptions({
             withCredentials: true
         }));
   	}
+
+    queryTeacherInfo() {
+        return this.http.getAsync(Config.teacherInfo, new RequestOptions({
+            withCredentials: true
+        }));
+    }
 
     upload(file: File) {
         let form = new FormData();
@@ -40,7 +46,9 @@ export default class CommonService {
         form.append("space", "uquiz_image");
         form.append("owner", "-1");
         form.append("name", "-1");
-        return this.http.postAsync(Config.upload, form);
+        return this.http.postAsync(Config.upload, form, new RequestOptions({
+            withCredentials: true
+        }));
     }
 
     uploadAudio(param: UploadAudioParam) {
@@ -51,10 +59,13 @@ export default class CommonService {
         form.append("owner", "-1");
         form.append("name", "-1");
         return this.http.postAsync(Config.upload, form, new RequestOptions({
-          withCredentials: true
-      }));
+            withCredentials: true
+        }));
     }
 
     addContent(param: AddContentParam) {
+        return this.http.postAsync(Config.addContent, param, new RequestOptions({
+            withCredentials: true
+        }));
     }
 }

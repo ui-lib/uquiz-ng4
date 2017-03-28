@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
 
@@ -13,6 +13,7 @@ import Alert from '../Alert';
 })
 
 export class HomeComponent implements OnInit {
+	@Output() updateNav: EventEmitter<string> = new EventEmitter();
 
 	public articles: any;
 
@@ -20,12 +21,14 @@ export class HomeComponent implements OnInit {
 	private size: number = 50;
 	private type: string = "use";
 
-	constructor(private service: HomeService, private router: Router) { }
+	constructor(private service: HomeService, private router: Router) {}
 
 	ngOnInit() {
-		this.service.autoLogin().then(() => {
-			this.queryList();
-		}).catch(() => {
+		this.updateNav.emit("home");
+		this.service.autoLogin()
+		.then(() => this.service.queryTeacherInfo())
+		.then(() => this.queryList())
+		.catch(() => {
 			Alert.error({
 				content: "网络异常, 请刷新浏览器重试!"
 			});

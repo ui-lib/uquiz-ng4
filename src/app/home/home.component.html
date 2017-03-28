@@ -1,3 +1,27 @@
-<p>
-  home works!
-</p>
+<div class="home-container">
+    <div class="title">
+        最新文章
+    </div>
+    <ul class="list-container">
+        <li class="list-item" v-for="course in listCourse">
+            <a class="list-link" v-bind:to="course.link">
+                <div class="mask"></div>
+                <div class="main-pic">
+                    <img v-bind:src="course.firstImageContent" />
+                </div>
+                <div class="article-info">
+                    <h3 class="article-title" v-text="course.title"></h3>
+                    <div class="time-views">
+                        <span class="time" v-text="course.createTime"></span>
+                        <span class="views" v-text="course.count"></span>
+                    </div>
+                </div>
+            </a>
+        </li>
+        <li class="list-item add-new-post">
+            <a class="list-link" target="_blank" to="/publish">
+                <img src="../assets/home/add-new-ico.jpg" class="add-new" />
+            </a>
+        </li>
+    </ul>
+</div>
