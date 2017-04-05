@@ -20,28 +20,28 @@ export class PublishComponent implements OnInit {
 
 	public contents: any[] = [];
 	public text: string = "";
-	public courseId: number;
+	public courseId: number = 3318821964595200;
 	public teacherInfo;
 
   	constructor(private service: PublishService, private router: Router) { }
 
   	ngOnInit() {
-  		this.service.autoNewArticle().then((res) => {
-  			const {id, message} = res;
-  			if (!id) {
-  				Alert.error({
-	        		content: message
-	        	}).then(() => {
-	        		this.router.navigate(["/"]);
-	        	}); 				
-  			} else {
-  				this.courseId = id;
-  			}
-  		}).catch(() => {
-        	Alert.error({
-        		content: "网络异常,请重试!"
-        	});
-  		});
+  		// this.service.autoNewArticle().then((res) => {
+  		// 	const {id, message} = res;
+  		// 	if (!id) {
+  		// 		Alert.error({
+	   //      		content: message
+	   //      	}).then(() => {
+	   //      		this.router.navigate(["/"]);
+	   //      	}); 				
+  		// 	} else {
+  		// 		this.courseId = id;
+  		// 	}
+  		// }).catch(() => {
+    //     	Alert.error({
+    //     		content: "网络异常,请重试!"
+    //     	});
+  		// });
   		this.service.queryTeacherInfo().then((res) => {
   			this.teacherInfo = res;
   		}).catch(() => {
@@ -83,15 +83,12 @@ export class PublishComponent implements OnInit {
   	}
 
   	selectMusic(ev: InputEvent) {
-
   	}
 
   	changeFontStyle(ev: InputEvent) {}
 
   	addTop(ev: MouseEvent) {
-
   		console.log("addTop");
-
   	}
 
 }
