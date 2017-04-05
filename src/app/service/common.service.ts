@@ -7,20 +7,11 @@ import 'rxjs/add/operator/map';
 
 import Config from '../Config';
 
-interface UploadAudioParam {
+//	文件上传类型
+declare interface UploadAudioParam {
     file: File,
     duration: number
-};
-
-interface AddContentParam {
-    content: string,
-    contentType: string,
-    courseId: number,
-    id: number,
-    sort: number,
-    status: string,
-    duration?: number
-};
+}
 
 @Injectable()
 export default class CommonService {
@@ -55,16 +46,10 @@ export default class CommonService {
         let form = new FormData();
         const {file} = param;
         form.append("file", file);
-        form.append("space", "uquiz_image");
+        form.append("space", "uquiz_video");
         form.append("owner", "-1");
         form.append("name", "-1");
         return this.http.postAsync(Config.upload, form, new RequestOptions({
-            withCredentials: true
-        }));
-    }
-
-    addContent(param: AddContentParam) {
-        return this.http.postAsync(Config.addContent, param, new RequestOptions({
             withCredentials: true
         }));
     }

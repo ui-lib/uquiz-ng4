@@ -10,20 +10,21 @@ import 'rxjs/add/operator/map';
 
 import CommonService from "./common.service";
 
-import Config from '../Config';
-
-interface QueryListParam {
-    page: number;
-    size: number;
-    type: string
+//	查询首页数据
+declare interface QueryListParam {
+	page: number;
+	size: number;
+	type: string
 }
+
+import Config from '../Config';
 
 @Injectable()
 export default class HomeService extends CommonService {
 
-	constructor(public http: CoolHttp) {
-		super(http);
-	}
+	  constructor(public http: CoolHttp) {
+		    super(http);
+	  }
 
   	queryList(param: QueryListParam) {
   		return this.http.getAsync(`${Config.listCourse}?${qs.stringify(param)}`, new RequestOptions({
