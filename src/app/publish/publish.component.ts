@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { Router } from '@angular/router';
 
 import PublishService from "../service/publish.service";
+import { EditorComponent } from "../editor/editor.component";
+
 import Alert from '../Alert';
 
 //  input change事件参数
@@ -22,6 +24,9 @@ export class PublishComponent implements OnInit {
 	public text: string = "";
 	public courseId: number = 3318821964595200;
 	public teacherInfo;
+
+	@ViewChild(EditorComponent)
+  	private editor: EditorComponent;
 
   	constructor(private service: PublishService, private router: Router) { }
 
@@ -85,10 +90,36 @@ export class PublishComponent implements OnInit {
   	selectMusic(ev: InputEvent) {
   	}
 
-  	changeFontStyle(ev: InputEvent) {}
+  	changeFontStyle(ev) {
+  		this.editor.boldText();
+  		ev.preventDefault();
+  	}
 
   	addTop(ev: MouseEvent) {
-  		console.log("addTop");
+  		const content = this.editor.outputContent(),
+  			contentParam = {
+				contentType: "TEXT",
+				id: 0,
+				courseId: this.courseId,
+				content,
+				sort: 0,
+				status: "ENABLED",
+	  		};
+  		if (!content) {
+	    	Alert.warn({
+	    		content: "请先输入内容!"
+	    	});
+	        return;
+  		}
+  		this.service.addContent(contentParam).then((res) => {
+  				this.contents.push(res);
+  			})
+  			.catch(() => {
+	        	Alert.error({
+	        		content: "网络异常,请重试!"
+	        	});
+	        });
+        this.editor.reset();
   	}
 
 }

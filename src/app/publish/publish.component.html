@@ -16,7 +16,7 @@
         <div class="item" *ngFor="let content of contents">
             <img class="user-avatar" [src]="teacherInfo.headImg" />
             <div class="detail">
-                <p *ngIf="content.contentType == 'TEXT'" v-html="content.content"></p>
+                <p *ngIf="content.contentType == 'TEXT'" [innerHTML]="content.content"></p>
                 <img *ngIf="content.contentType == 'IMAGE'" [src]="content.content" class="article-pic" />
                 <div *ngIf="content.contentType == 'VIDEO'">
                     <!-- <a-player autoplay :music="{
@@ -30,7 +30,7 @@
     </div>
     <div class="edit-area">
         <div class="input-text">
-        	<app-editor placeholder="输入内容..."></app-editor>
+        	<app-editor #editor placeholder="输入内容..."></app-editor>
         </div>
         <div class="fn-btn-group">
             <span class="upload-image">

@@ -21,10 +21,6 @@ export class EditorComponent implements OnInit {
   	constructor() {
   	}
 
-    bold() {
-      document.execCommand("bold");
-    }
-
   	ngOnInit() {
   		this.div = document.querySelector("#editor");
   		this.div.innerHTML = "";
@@ -40,21 +36,30 @@ export class EditorComponent implements OnInit {
       this.editor.contentEditable = true;
       this.editor.innerHTML = "输入内容...";
       this.div.appendChild(this.editor);
-      this.div.addEventListener("focus", () => {
-          const {innerHTML} = this.div;
-
-          console.log(this.div.innerHTML);
-          if (innerHTML === this.placeholder) {
-              this.div.innerHTML = "";
+      this.editor.addEventListener("focus", () => {
+          const {innerHTML} = this.editor;
+          if (innerHTML.trim() === this.placeholder) {
+              this.editor.innerHTML = "";
           }
       });
-      this.div.addEventListener("blur", () => {
-          const {innerHTML} = this.div;
-          if (innerHTML === "") {
+      this.editor.addEventListener("blur", () => {
+          const {innerHTML} = this.editor;
+          if (innerHTML.trim() === "") {
               this.editor.innerHTML = this.placeholder;
           }
       });
   	}
 
+    outputContent() {
+      return this.editor.innerHTML.replace(/\<b\>/gim, "<b style='font-weight: 700;'>");
+    }
+
+    boldText() {
+      document.execCommand("bold");
+    }
+
+    reset() {
+      this.editor.innerHTML = this.placeholder;
+    }
 
 }
