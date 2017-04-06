@@ -1,3 +1,25 @@
-<p>
-  subject works!
-</p>
+<div class="home-container">
+    <div class="title">
+        所有文章
+    </div>
+    <ul class="list-container">
+        <li class="list-item" *ngFor="let course of articles">
+                <div class="mask">
+                    <a class="list-link vide-detail" [href]="course.link">
+                    </a>
+                    <span class="delete-subject" (click)="deleteCourse(course)"></span>
+                </div>
+                <div class="main-pic">
+                    <img [src]="course.firstImageContent" />
+                </div>
+                <div class="article-info">
+                    <h3 class="article-title" [textContent]="course.title"></h3>
+                    <div class="time-views">
+                        <span class="time" [textContent]="course.createTime"></span>
+                        <span class="views" [textContent]="course.count"></span>
+                        <span class="status" [textContent]="course.statusText"></span>
+                    </div>
+                </div>
+        </li>
+    </ul>
+</div>

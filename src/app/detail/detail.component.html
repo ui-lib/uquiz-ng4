@@ -1,3 +1,36 @@
-<p>
-  detail works!
-</p>
+<div class="detail-container">
+        <div class="nav">
+            <a to="/home">首页</a>
+            <span>&gt;</span>
+            <a [href]="link">文章详情</a>
+        </div>
+        <div class="article-main">
+            <div class="title">
+                <h1 class="title-text">
+                    {{detail.title}}
+                    <a *ngIf="allowEdit" [href]="editLink" class="edit-ico"></a>
+                </h1>
+                <div class="time-views">
+                    <span class="time" [textContent]="detail.createTime"></span>
+                    <span class="views" [textContent]="detail.count"></span>
+                </div>
+            </div>
+        </div>
+        <div class="post-list">
+            <div class="item" *ngFor="let content of detail.contents">
+                <img [src]="detail.teacherHeadImg" class="user-avatar" />
+                <div class="detail">
+                    <p *ngIf="content.contentType == 'TEXT'" [innerHTML]="content.content"></p>
+                    <img *ngIf="content.contentType == 'IMAGE'" [src]="content.content" class="article-pic"/>
+                    <div *ngIf="content.contentType == 'VIDEO'">
+                        <!-- <a-player :music="{
+                            autoplay: false,
+                            mode: 'single',
+                            title: '语音消息',
+                            url: content.content
+                        }"></a-player> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -90,7 +90,7 @@ export class PublishComponent implements OnInit {
   	selectMusic(ev: InputEvent) {
   	}
 
-  	changeFontStyle(ev) {
+  	changeFontStyle(ev: MouseEvent) {
   		this.editor.boldText();
   		ev.preventDefault();
   	}
