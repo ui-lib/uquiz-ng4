@@ -13,16 +13,17 @@ import Alert from '../Alert';
 })
 
 export class HomeComponent implements OnInit {
-	@Output() updateNav: EventEmitter<string> = new EventEmitter();
+	@Output() updateNav = new EventEmitter<any>();
 
 	public articles: any;
 	private page: number = 1;
-	private size: number = 50;
+	private size: number = 29;
 	private type: string = "use";
 
 	constructor(private service: HomeService, private router: Router) {}
 
 	ngOnInit() {
+		console.log(this);
 		this.updateNav.emit("home");
 		this.queryList()
 		.then((res) => {

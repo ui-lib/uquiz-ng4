@@ -1,31 +1,31 @@
 <div id="app">
-	<div class="header">
-	    <div class="header-center">
-	        <a href="/" class="site-logo"></a>
-	        <div class="menus">
-	            <span class="menu-item home">
+    <div class="header">
+        <div class="header-center">
+            <a href="/" class="site-logo"></a>
+            <div class="menus">
+                <span class="menu-item home" [ngClass]="{'active': nav == 'home'}">
 	                    <a href="/home">首页</a>
 	                    <em class="bottom-line"></em>
-	                </span>
-	            <span class="menu-item subject">
+	            </span>
+                <span class="menu-item subject" [ngClass]="{'active': nav == 'subject'}">
 	                    <a href="/subject">课程</a>
 	                    <em class="bottom-line"></em>
 	                </span>
-	            <span class="menu-item my">
+                <span class="menu-item my" [ngClass]="{'active': nav == 'my'}">
 	                    <a href="/my">我的</a>
 	                    <em class="bottom-line"></em>
 	                </span>
-	        </div>
-	    </div>
-	</div>
-	<router-outlet></router-outlet>
-	<div>
-      <cool-loading-indicator [indicatorDelay]="0">
-	      <div class="loading-mask" v-show="loading">
-	            <div class="uil-ring-css">
-	                <div></div>
-	            </div>
-	        </div>
-      </cool-loading-indicator> 
+            </div>
+        </div>
+    </div>
+    <router-outlet></router-outlet>
+    <div>
+        <cool-loading-indicator [indicatorDelay]="0">
+            <div class="loading-mask" v-show="loading">
+                <div class="uil-ring-css">
+                    <div></div>
+                </div>
+            </div>
+        </cool-loading-indicator>
     </div>
 </div>

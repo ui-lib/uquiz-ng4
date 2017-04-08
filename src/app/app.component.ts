@@ -13,6 +13,7 @@ export class AppComponent {
 	  }
 
   	navChanged(nav:string) {
+        console.log(nav);
   	  	this.nav = nav;
   	}
 }

@@ -16,18 +16,19 @@ export class SubjectComponent implements OnInit {
 	public articles: any;
 
 	private page: number = 1;
-	private size: number = 50;
+	private size: number = 30;
 	private type: string = "view";
 
   	constructor(private service: SubjectService) { }
 
   	ngOnInit() {
+  		this.updateNav.emit("home");
   		this.queryList()
 		.then((res) => {
 			const {code, message, content} = res;
 			if (code === 10000) {
 				Alert.error({
-					content: "网络异常, 请刷新浏览器重试!"
+					content: message
 				});
 				return;
 			}
@@ -46,7 +47,6 @@ export class SubjectComponent implements OnInit {
   	}
 
   	deleteCourse(course) {
-  		console.log(course);
   		Alert.confirm({
   			content: "你确定要删除这篇文章吗?"
   		}).then((res) => {
@@ -57,12 +57,24 @@ export class SubjectComponent implements OnInit {
 					content: message
 				});
 			} else {
-				this.service.deleteCourse(id).then(() => {
-	  				Alert.success({
+				this.service.deleteCourse(id).then((res) => {
+					return Alert.success({
 						content: "删除成功!"
 					});
-					this.queryList();
 	  			})
+	  			.then(() => {
+	  				return this.queryList();
+	  			})
+				.then((res) => {
+					const {code, message, content} = res;
+					if (code === 10000) {
+						Alert.error({
+							content: message
+						});
+						return;
+					}
+					this.articles = this.service.organizeContent(content);
+				})
 	  			.catch(() => {
 					Alert.error({
 						content: "网络异常, 请刷新浏览器重试!"
