@@ -23,14 +23,15 @@ export class HomeComponent implements OnInit {
 	constructor(private service: HomeService, private router: Router) {}
 
 	ngOnInit() {
-		console.log(this);
 		this.updateNav.emit("home");
-		this.queryList()
+		this.service.autoLogin().then(() => {
+			return this.queryList();
+		})
 		.then((res) => {
 			const {code, message, content} = res;
 			if (code === 10000) {
 				Alert.error({
-					content: "网络异常, 请刷新浏览器重试!"
+					content: message
 				});
 				return;
 			}
