@@ -31,22 +31,22 @@ export default class PublishService extends CommonService {
       }
 
       //    新建一篇文章获取id
-      autoNewArticle() {
+      public autoNewArticle() {
           return this.http.getAsync(`${Config.course(0)}`, new RequestOptions({
               withCredentials: true
           }));
       }
 
       //  获取上传的图片地址
-      getFileUrl(id: number) {
+      public getFileUrl(id: number) {
           return Config.file(id);
       }
 
       //    上传内容
-      addContent(param: AddContentParam) {
-        return this.http.postAsync(Config.addContent, param, new RequestOptions({
-            withCredentials: true
-        }));
+      public addContent(param: AddContentParam) {
+          return this.http.postAsync(Config.addContent, param, new RequestOptions({
+              withCredentials: true
+          }));
       }
 }
 

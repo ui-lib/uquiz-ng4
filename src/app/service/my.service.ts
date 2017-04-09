@@ -33,7 +33,7 @@ export default class MyService extends CommonService {
 	    super(http);
 	}
 
-  	modify(info: saveInfoParam) {
+  	public modify(info: saveInfoParam) {
   		return this.http.postAsync(Config.modify, info, new RequestOptions({
   			withCredentials: true
   		}));

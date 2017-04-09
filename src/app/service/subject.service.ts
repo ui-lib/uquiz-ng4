@@ -19,7 +19,7 @@ export default class SubjectService extends HomeService {
 		super(http);
 	}
 
-  	deleteCourse(id: number) {
+  	public deleteCourse(id: number) {
   		return this.http.postAsync(Config.delCourse(id), {}, new RequestOptions({
   			withCredentials: true
   		}));

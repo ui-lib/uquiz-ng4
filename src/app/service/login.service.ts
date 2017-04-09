@@ -10,13 +10,11 @@ import Config from '../Config';
 @Injectable()
 export default class LoginService {
 
-	private requestOpt = new RequestOptions({
-    	withCredentials: true
-    });
-
 	constructor(private http: CoolHttp) {}
 
-  	getErCodeURI() {
-  		return this.http.getAsync(Config.scanView, this.requestOpt);
+  	public getErCodeURI() {
+  		return this.http.getAsync(Config.scanView, new RequestOptions({
+    		withCredentials: true
+    	}));
   	}
 }

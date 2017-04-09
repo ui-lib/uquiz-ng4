@@ -3,17 +3,17 @@
         最新文章
     </div>
     <ul class="list-container">
-        <li class="list-item" v-for="course in listCourse">
-            <a class="list-link" v-bind:to="course.link">
+        <li class="list-item" *ngFor="let course of articles">
+            <a class="list-link" [href]="course.link">
                 <div class="mask"></div>
                 <div class="main-pic">
-                    <img v-bind:src="course.firstImageContent" />
+                    <img [src]="course.firstImageContent" />
                 </div>
                 <div class="article-info">
-                    <h3 class="article-title" v-text="course.title"></h3>
+                    <h3 class="article-title" [textContent]="course.title"></h3>
                     <div class="time-views">
-                        <span class="time" v-text="course.createTime"></span>
-                        <span class="views" v-text="course.count"></span>
+                        <span class="time" [textContent]="course.createTime"></span>
+                        <span class="views" [textContent]="course.count"></span>
                     </div>
                 </div>
             </a>

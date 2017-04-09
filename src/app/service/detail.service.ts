@@ -19,7 +19,7 @@ export default class DetailService extends CommonService {
       super(http);
     }
 
-    queryDetail(id: number) {
+    public queryDetail(id: number) {
        return this.http.getAsync(Config.courseDetail(id), new RequestOptions({
            withCredentials: true
        }));

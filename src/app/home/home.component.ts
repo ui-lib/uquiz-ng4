@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
 	public articles: any;
 	private page: number = 1;
 	private size: number = 29;
-	private type: string = "use";
+	private type: string = "view";
 
 	constructor(private service: HomeService, private router: Router) {}
 
@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
 			}
 			this.articles = this.service.organizeContent(content);
 		})
-		.catch(() => {
+		.catch((e) => {
 			Alert.error({
 				content: "网络异常, 请刷新浏览器重试!"
 			});

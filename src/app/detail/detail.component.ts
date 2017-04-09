@@ -34,7 +34,9 @@ export class DetailComponent implements OnInit {
 	  			return this.service.queryDetail(this.couseId)
 	  		})
 	  		.then((res) => {
-	  			this.detail = res;
+	  			this.detail = Object.assign({}, res, {
+	  				createTime: this.service.getDate(res.createTime)
+	  			});
 	  		})
 	  		.catch(() => {
 	        	Alert.error({
