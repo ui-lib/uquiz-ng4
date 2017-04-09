@@ -1,3 +1,43 @@
-<p>
-  my works!
-</p>
+    <div class="my-container">
+        <div class="nav">
+            <a href="/home">首页</a>
+            <span>&gt;</span>
+            <a href="/my">我的</a>
+        </div>
+        <div class="center-area">
+            <div class="user-avatar-container" *ngIf="teacherInfo != undefined">
+                <img src="../assets/detail/avatar.png" [src]="teacherInfo.headImg" class="user-avatar"/>
+            </div>
+            <div class="name" *ngIf="!showEdit">
+                <span [innerHTML]="nickName"></span>
+                <span class="edit-name" (click)="edit()"></span>
+            </div>
+            <div class="links" *ngIf="!showEdit">
+                <span class="link-item" (click)="edit()">
+                    个人信息
+                </span>
+            </div>
+            <div *ngIf="showEdit">
+            	<div class="name edit-item">
+	                <span class="label">名字:</span>
+	                <input class="name-edit-input" [(ngModel)]="name" />
+	            </div>
+	            <div class="name edit-item">
+	                <span class="label">昵称:</span>
+	                <input class="name-edit-input" [(ngModel)]="nickName" />
+	            </div>
+	            <div class="name edit-item">
+	                <span class="label">手机:</span>
+	                <input class="name-edit-input" [(ngModel)]="phone" />
+	            </div>
+	            <div class="name edit-item">
+	                <span class="label">工作单位:</span>
+	                <input class="name-edit-input" [(ngModel)]="university" />
+	            </div>
+	            <div class="name edit-item">
+	                <span class="confirm-save" (click)="update()">确定</span>
+	                <span class="cancel-save" (click)="cancel()">取消</span>
+	            </div>
+            </div>
+        </div>
+    </div>
