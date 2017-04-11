@@ -16,6 +16,7 @@ import { EditComponent } from './edit/edit.component';
 import { EditorComponent } from './editor/editor.component';
 import { MyComponent } from './my/my.component';
 import { PublishComponent } from './publish/publish.component';
+import { PlayerComponent } from './player/player.component';
 
 @NgModule({
     declarations: [
@@ -27,7 +28,8 @@ import { PublishComponent } from './publish/publish.component';
         EditComponent,
         EditorComponent,
         MyComponent,
-        PublishComponent
+        PublishComponent,
+        PlayerComponent
     ],
     imports: [
         BrowserModule,

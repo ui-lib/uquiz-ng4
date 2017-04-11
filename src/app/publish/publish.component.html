@@ -14,16 +14,19 @@
     </div>
     <div class="post-list">
         <div class="item" *ngFor="let content of contents">
-            <img class="user-avatar" [src]="teacherInfo.headImg" />
+            <img class="user-avatar" *ngIf="teacherInfo != undefined" [src]="teacherInfo.headImg" />
             <div class="detail">
                 <p *ngIf="content.contentType == 'TEXT'" [innerHTML]="content.content"></p>
                 <img *ngIf="content.contentType == 'IMAGE'" [src]="content.content" class="article-pic" />
                 <div *ngIf="content.contentType == 'VIDEO'">
-                    <!-- <a-player autoplay :music="{
-                          title: '语音消息',
-                          mode: 'single',
-                          url: content.content
-                        }"></a-player> -->
+                    <app-player
+                        [music]="{
+                            title: '语音消息',
+                            author: teacherInfo.nickName,
+                            mode: 'single',
+                            url: content.content
+                        }"
+                    ></app-player>
                 </div>
             </div>
         </div>

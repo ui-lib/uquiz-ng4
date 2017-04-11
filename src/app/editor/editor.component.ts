@@ -10,9 +10,6 @@ export class EditorComponent implements OnInit {
     @Input()
     placeholder: string;
 
-    @Output()
-    getContent
-
   	private editor: any = document.createElement("div");
 	  private div;
 

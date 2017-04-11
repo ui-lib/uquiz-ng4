@@ -38,7 +38,7 @@ export class PublishComponent implements OnInit {
 	   //      		content: message
 	   //      	}).then(() => {
 	   //      		this.router.navigate(["/"]);
-	   //      	}); 				
+	   //      	});
   		// 	} else {
   		// 		this.courseId = id;
   		// 	}
@@ -49,6 +49,15 @@ export class PublishComponent implements OnInit {
   		// });
   		this.service.queryTeacherInfo().then((res) => {
   			this.teacherInfo = res;
+        this.contents.push({
+          "id":3326848603799552,
+          "courseId":3318821964595200,
+          "contentType":"VIDEO",
+          "content": "http://127.0.0.1:3000/Opps.mp3",
+          "status":"ENABLED",
+          "sort":8,
+          "duration":0
+        });
   		}).catch(() => {
         	Alert.error({
         		content: "网络异常,请重试!"
