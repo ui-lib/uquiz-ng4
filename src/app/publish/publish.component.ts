@@ -22,6 +22,7 @@ export class PublishComponent implements OnInit {
 
 	public contents: any[] = [];
 	public text: string = "";
+  public title: string = "";
 	public courseId: number = 3318821964595200;
 	public teacherInfo;
 
@@ -31,33 +32,24 @@ export class PublishComponent implements OnInit {
   	constructor(private service: PublishService, private router: Router) { }
 
   	ngOnInit() {
-  		// this.service.autoNewArticle().then((res) => {
-  		// 	const {id, message} = res;
-  		// 	if (!id) {
-  		// 		Alert.error({
-	   //      		content: message
-	   //      	}).then(() => {
-	   //      		this.router.navigate(["/"]);
-	   //      	});
-  		// 	} else {
-  		// 		this.courseId = id;
-  		// 	}
-  		// }).catch(() => {
-    //     	Alert.error({
-    //     		content: "网络异常,请重试!"
-    //     	});
-  		// });
+  		this.service.autoNewArticle().then((res) => {
+  			const {id, message} = res;
+  			if (!id) {
+  				Alert.error({
+	        		content: message
+	        	}).then(() => {
+	        		this.router.navigate(["/"]);
+	        	});
+  			} else {
+  				this.courseId = id;
+  			}
+  		}).catch(() => {
+        	Alert.error({
+        		content: "网络异常,请重试!"
+        	});
+  		});
   		this.service.queryTeacherInfo().then((res) => {
   			this.teacherInfo = res;
-        this.contents.push({
-          "id":3326848603799552,
-          "courseId":3318821964595200,
-          "contentType":"VIDEO",
-          "content": "http://127.0.0.1:3000/Opps.mp3",
-          "status":"ENABLED",
-          "sort":8,
-          "duration":0
-        });
   		}).catch(() => {
         	Alert.error({
         		content: "网络异常,请重试!"
@@ -130,5 +122,42 @@ export class PublishComponent implements OnInit {
 	        });
         this.editor.reset();
   	}
+
+    confirmPublish() {
+      let {title, contents, courseId} = this;
+      title = title.trim();
+      if (!contents.length) {
+        Alert.error({
+          content: "请先至少添加一条消息!"
+        });
+        return;
+      }
+
+      if (!title) {
+        Alert.error({
+          content: "请先输入标题!"
+        });
+        return;
+      }
+
+      this.service.submitAtricle({
+        title,
+        contents,
+        courseId,
+        teacherId: this.teacherInfo.id
+      }).then((res) => {
+        Alert.success({
+          content: "发布成功"
+        }).then(() => {
+          alert(11);
+          this.router.navigate(["/home"]);
+        });
+      })
+        .catch((e) => {
+          Alert.error({
+            content: "网络异常,请重试!"
+          });
+        });
+    }
 
 }

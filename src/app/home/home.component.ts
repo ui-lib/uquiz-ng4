@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
 	public articles: any;
 	private page: number = 1;
 	private size: number = 29;
-	private type: string = "view";
+	private type: string = "use";
 
 	constructor(private service: HomeService, private router: Router) {}
 

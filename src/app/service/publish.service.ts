@@ -48,5 +48,18 @@ export default class PublishService extends CommonService {
               withCredentials: true
           }));
       }
+
+      public submitAtricle({title, contents, courseId, teacherId}) {
+          return this.http.postAsync(Config.couseEdit, {
+            title, 
+            contents, 
+            courseId, 
+            teacherId,
+            id: courseId,
+            status: "ENABLED"
+          }, new RequestOptions({
+              withCredentials: true
+          }));        
+      }
 }
 

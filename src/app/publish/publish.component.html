@@ -6,10 +6,10 @@
     </div>
     <div class="article-main">
         <div class="complete">
-            <span class="complete-btn" v-on:click="confirmPublish">完成</span>
+            <span class="complete-btn" (click)="confirmPublish()">完成</span>
         </div>
         <div class="title">
-            <input class="title-text" v-model="title" placeholder="输入标题..." />
+            <input class="title-text" [(ngModel)]="title" placeholder="输入标题..." />
         </div>
     </div>
     <div class="post-list">
