@@ -23,12 +23,14 @@
                     <p *ngIf="content.contentType == 'TEXT'" [innerHTML]="content.content"></p>
                     <img *ngIf="content.contentType == 'IMAGE'" [src]="content.content" class="article-pic"/>
                     <div *ngIf="content.contentType == 'VIDEO'">
-                        <!-- <a-player :music="{
-                            autoplay: false,
-                            mode: 'single',
-                            title: '语音消息',
-                            url: content.content
-                        }"></a-player> -->
+                        <app-player
+                            [music]="{
+                                title: '语音消息',
+                                author: teacherInfo.nickName,
+                                mode: 'single',
+                                url: content.content
+                            }"
+                        ></app-player>
                     </div>
                 </div>
             </div>

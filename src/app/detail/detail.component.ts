@@ -37,6 +37,7 @@ export class DetailComponent implements OnInit {
 	  			this.detail = Object.assign({}, res, {
 	  				createTime: this.service.getDate(res.createTime)
 	  			});
+	  			this.allowEdit = !!(res.teacherId === this.teacherInfo.id);
 	  		})
 	  		.catch(() => {
 	        	Alert.error({

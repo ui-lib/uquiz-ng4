@@ -39,14 +39,6 @@
     background: url(../../assets/detail/edit-ico.png) no-repeat center;
     float: right;
     margin: -3px 0 0 0;
-    transition: all 0.3s;
-    opacity: 0;
-    filter: alpha(opacity=0);
-}
-
-.title:hover .edit-ico {
-    opacity: 1;
-    filter: alpha(opacity=100);
 }
 
 .time-views {

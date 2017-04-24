@@ -1,3 +1,50 @@
-<p>
-  edit works!
-</p>
+<div class="detail-container">
+    <div class="nav">
+        <a href="/home">首页</a>
+        <span>&gt;</span>
+        <a>文章编辑</a>
+    </div>
+    <div class="article-main">
+        <div class="complete">
+            <span class="complete-btn" (click)="confirmPublish()">完成</span>
+        </div>
+        <div class="title">
+            <input class="title-text" [(ngModel)]="title" placeholder="输入标题..." />
+        </div>
+    </div>
+    <div class="post-list" id="post-list">
+        <div class="split-line" id="split-line"></div>
+        <div class="item" *ngFor="let content of contents">
+            <img class="user-avatar" *ngIf="teacherInfo != undefined" [src]="teacherInfo.headImg" />
+            <div class="detail">
+                <p *ngIf="content.contentType == 'TEXT'" [innerHTML]="content.content"></p>
+                <img *ngIf="content.contentType == 'IMAGE'" [src]="content.content" class="article-pic" />
+                <div *ngIf="content.contentType == 'VIDEO'">
+                    <app-player
+                        [music]="{
+                            title: '语音消息',
+                            author: teacherInfo.nickName,
+                            mode: 'single',
+                            url: content.content
+                        }"
+                    ></app-player>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="edit-area">
+        <div class="input-text">
+        	<app-editor #editor placeholder="输入内容..."></app-editor>
+        </div>
+        <div class="fn-btn-group">
+            <span class="upload-image">
+                    <input type="file" accept="image/png,image/gif,image/jpeg,audio/mpeg" (change)="selectImage($event)"/>
+                </span>
+            <span class="upload-music">
+                    <input type="file" (change)="selectMusic($event)"/>
+                </span>
+            <span class="blod-text" (click)="changeFontStyle($event)"></span>
+            <span class="add-top" (click)="addTop($event)">加上去</span>
+        </div>
+    </div>
+</div>

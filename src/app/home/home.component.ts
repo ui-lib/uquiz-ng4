@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
 	@Output() updateNav = new EventEmitter<any>();
 
 	public articles: any;
-	private page: number = 1;
+	private page: number = 0;
 	private size: number = 29;
 	private type: string = "use";
 

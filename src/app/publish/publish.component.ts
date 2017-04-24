@@ -23,11 +23,11 @@ export class PublishComponent implements OnInit {
 	public contents: any[] = [];
 	public text: string = "";
   public title: string = "";
-	public courseId: number = 3318821964595200;
+	public courseId: number;
 	public teacherInfo;
 
 	@ViewChild(EditorComponent)
-  	private editor: EditorComponent;
+  private editor: EditorComponent;
 
   	constructor(private service: PublishService, private router: Router) { }
 
@@ -120,7 +120,7 @@ export class PublishComponent implements OnInit {
                 content,
                 sort: 0,
                 status: "ENABLED",
-              };;
+              };
             return this.service.addContent(contentParam);
           })
           .then((res) => {

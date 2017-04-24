@@ -52,7 +52,7 @@ export class EditorComponent implements OnInit {
       if (innerHTML === this.placeholder) {
         return "";
       }
-      return innerHTML.replace(/\<b\>/gim, "<b style='font-weight: 700;'>");
+      return this.editor.innerHTML.replace(/\<b\>/gim, "<b style='font-weight: 700;'>");
     }
 
     boldText() {

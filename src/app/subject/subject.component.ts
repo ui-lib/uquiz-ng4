@@ -15,7 +15,7 @@ export class SubjectComponent implements OnInit {
 
 	public articles: any;
 
-	private page: number = 1;
+	private page: number = 0;
 	private size: number = 30;
 	private type: string = "view";
 
