@@ -54,6 +54,10 @@ export default class CommonService {
         }));
     }
 
+      public getFileUrl(id: number) {
+          return Config.file(id);
+      }
+
     public getDate(date: number):string {
         const {formatNumber} = this,
             time = new Date(date);

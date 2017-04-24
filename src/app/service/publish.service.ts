@@ -37,11 +37,6 @@ export default class PublishService extends CommonService {
           }));
       }
 
-      //  获取上传的图片地址
-      public getFileUrl(id: number) {
-          return Config.file(id);
-      }
-
       //    上传内容
       public addContent(param: AddContentParam) {
           return this.http.postAsync(Config.addContent, param, new RequestOptions({

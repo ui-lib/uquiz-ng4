@@ -48,7 +48,11 @@ export class EditorComponent implements OnInit {
   	}
 
     outputContent() {
-      return this.editor.innerHTML.replace(/\<b\>/gim, "<b style='font-weight: 700;'>");
+      let {innerHTML} = this.editor;
+      if (innerHTML === this.placeholder) {
+        return "";
+      }
+      return innerHTML.replace(/\<b\>/gim, "<b style='font-weight: 700;'>");
     }
 
     boldText() {

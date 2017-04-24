@@ -18,7 +18,7 @@ export class PlayerComponent implements OnInit {
 	showlrc: boolean = false;
 
 	@Input()
-	mutex: boolean = false;
+	mutex: boolean = true;
 
 	@Input()
 	preload: boolean = true;

@@ -38,7 +38,7 @@ export class PublishComponent implements OnInit {
   				Alert.error({
 	        		content: message
 	        	}).then(() => {
-	        		this.router.navigate(["/"]);
+	        		this.router.navigate(["/publish"]);
 	        	});
   			} else {
   				this.courseId = id;
@@ -58,7 +58,7 @@ export class PublishComponent implements OnInit {
   	}
 
   	selectImage(ev: InputEvent) {
-  		const target = ev.target,
+  		const {target} = ev,
             file = target.files[0],
             {size} = file;
             if (size > 1024 * 1024 * 5) {
@@ -89,6 +89,49 @@ export class PublishComponent implements OnInit {
   	}
 
   	selectMusic(ev: InputEvent) {
+      const {target} = ev,
+        file = target.files[0],
+        {size, name} = file;
+      let audio = new Audio(), duration;
+      audio.src = URL.createObjectURL(file);
+      if (!/\.mp3$/i.test(name)) {
+          Alert.warn({
+            content: "你上传的文件不是mp3类型,请重新选择mp3类型的文件进行上传!"
+          });
+          return;
+      }
+      if (size > 1024 * 1024 * 5) {
+          Alert.warn({
+            content: "你上传的文件超过5兆,请重新选择5兆以下的文件进行上传!"
+          });
+          return;
+      }
+      audio.oncanplay = () => {
+        duration = audio.duration;
+        this.service.uploadAudio({file, duration})
+          .then((res) => {
+            const {id} = res,
+              content = this.service.getFileUrl(id),
+              contentParam = {
+                contentType: "VIDEO",
+                id: 0,
+                courseId: this.courseId,
+                duration,
+                content,
+                sort: 0,
+                status: "ENABLED",
+              };;
+            return this.service.addContent(contentParam);
+          })
+          .then((res) => {
+            this.contents.push(res);
+          })
+          .catch(() => {
+            Alert.error({
+              content: "网络异常,请重试!"
+            });
+          });
+      };
   	}
 
   	changeFontStyle(ev: MouseEvent) {
@@ -99,18 +142,18 @@ export class PublishComponent implements OnInit {
   	addTop(ev: MouseEvent) {
   		const content = this.editor.outputContent(),
   			contentParam = {
-				contentType: "TEXT",
-				id: 0,
-				courseId: this.courseId,
-				content,
-				sort: 0,
-				status: "ENABLED",
+  				contentType: "TEXT",
+  				id: 0,
+  				courseId: this.courseId,
+  				content,
+  				sort: 0,
+  				status: "ENABLED",
 	  		};
   		if (!content) {
 	    	Alert.warn({
 	    		content: "请先输入内容!"
 	    	});
-	        return;
+	      return;
   		}
   		this.service.addContent(contentParam).then((res) => {
   				this.contents.push(res);
@@ -149,7 +192,6 @@ export class PublishComponent implements OnInit {
         Alert.success({
           content: "发布成功"
         }).then(() => {
-          alert(11);
           this.router.navigate(["/home"]);
         });
       })
