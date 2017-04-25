@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import PublishService from "../service/publish.service";
+import NavService from "../service/nav.service";
 import { EditorComponent } from "../editor/editor.component";
 
 import Alert from '../Alert';
@@ -16,7 +17,7 @@ declare interface InputEvent extends Event {
   	selector: 'app-publish',
   	templateUrl: './publish.component.html',
   	styleUrls: ['./publish.component.css'],
-  	providers: [PublishService]
+  	providers: [PublishService, NavService]
 })
 export class PublishComponent implements OnInit {
 
@@ -29,9 +30,10 @@ export class PublishComponent implements OnInit {
 	@ViewChild(EditorComponent)
   private editor: EditorComponent;
 
-  	constructor(private service: PublishService, private router: Router) { }
+  	constructor(private service: PublishService, private navService: NavService, private router: Router) { }
 
   	ngOnInit() {
+      this.navService.changeNav("home");
   		this.service.autoNewArticle().then((res) => {
   			const {id, message} = res;
   			if (!id) {

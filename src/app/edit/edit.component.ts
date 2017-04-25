@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from "@angular/core";
 
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from "@angular/router";
 
 import EditService from "../service/edit.service";
-import Alert from '../Alert';
+import NavService from "../service/nav.service";
+import Alert from "../Alert";
 import DOM from "../DOM";
 
 import { EditorComponent } from "../editor/editor.component";
@@ -14,16 +15,17 @@ declare interface InputEvent extends Event {
 }
 
 @Component({
-  selector: 'app-edit',
-  templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.css'],
-  providers: [EditService]
+  selector: "app-edit",
+  templateUrl: "./edit.component.html",
+  styleUrls: ["./edit.component.css"],
+  providers: [EditService, NavService]
 })
 export class EditComponent implements OnInit {
 
 	public contents: any[] = [];
 	public text: string = "";
 	public title: string = "";
+  public link: string = "";
 	public courseId: number;
 	public teacherInfo;
 
@@ -36,11 +38,13 @@ export class EditComponent implements OnInit {
 	@ViewChild(EditorComponent)
 	private editor: EditorComponent;
 
-  	constructor(private service: EditService, private router: ActivatedRoute) { }
+  	constructor(private service: EditService, private navService: NavService, private router: ActivatedRoute) { }
 
   	ngOnInit() {
-		this.sub = this.router.params.subscribe(params => {
+      this.navService.changeNav("home");
+		  this.sub = this.router.params.subscribe(params => {
 			this.courseId = +params["id"];
+      this.link = `/edit/${this.courseId}`;
 			this.service.queryTeacherInfo().then((res) => {
 	  			this.teacherInfo = res;
 	  			return this.service.queryDetail(this.courseId)
@@ -198,7 +202,6 @@ export class EditComponent implements OnInit {
 	    	});
 	      return;
   		}
-      console.log(index);
   		this.service.addContent(contentParam, id).then((res) => {
   				this._insertToContents(res, index);
   			})

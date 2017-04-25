@@ -1,18 +1,18 @@
 <div id="app">
     <div class="header">
         <div class="header-center">
-            <a href="/" class="site-logo"></a>
+            <a [routerLink]="['/']" class="site-logo"></a>
             <div class="menus">
                 <span class="menu-item home" [ngClass]="{'active': nav == 'home'}">
-	                    <a href="/home">首页</a>
-	                    <em class="bottom-line"></em>
+                    <a [routerLink]="['/home']">首页</a>
+                    <em class="bottom-line"></em>
 	            </span>
                 <span class="menu-item subject" [ngClass]="{'active': nav == 'subject'}">
-	                    <a href="/subject">课程</a>
+	                    <a [routerLink]="['/subject']">课程</a>
 	                    <em class="bottom-line"></em>
 	                </span>
                 <span class="menu-item my" [ngClass]="{'active': nav == 'my'}">
-	                    <a href="/my">我的</a>
+	                    <a [routerLink]="['/my']">我的</a>
 	                    <em class="bottom-line"></em>
 	                </span>
             </div>

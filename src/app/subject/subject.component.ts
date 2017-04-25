@@ -1,17 +1,16 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
 
 import SubjectService from "../service/subject.service";
+import NavService from "../service/nav.service";
 import Alert from '../Alert';
 
 @Component({
   selector: 'app-subject',
   templateUrl: './subject.component.html',
   styleUrls: ['./subject.component.css'],
-  providers: [SubjectService]
+  providers: [SubjectService, NavService]
 })
 export class SubjectComponent implements OnInit {
-
-	@Output() updateNav: EventEmitter<string> = new EventEmitter();
 
 	public articles: any;
 
@@ -19,10 +18,10 @@ export class SubjectComponent implements OnInit {
 	private size: number = 30;
 	private type: string = "view";
 
-  	constructor(private service: SubjectService) { }
+  	constructor(private service: SubjectService, private navServie: NavService) { }
 
   	ngOnInit() {
-  		this.updateNav.emit("home");
+  		this.navServie.changeNav("subject");
   		this.queryList()
 		.then((res) => {
 			const {code, message, content} = res;

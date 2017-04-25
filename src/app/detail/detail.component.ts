@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import DetailService from "../service/detail.service";
+import NavService from '../service/nav.service';
 import Alert from '../Alert';
 
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.css'],
-  providers: [DetailService]
+  providers: [DetailService, NavService]
 })
 export class DetailComponent implements OnInit {
 
@@ -21,9 +22,10 @@ export class DetailComponent implements OnInit {
 	private sub: any;
 	private couseId: number;
 
-  	constructor(private service: DetailService, private router: ActivatedRoute) { }
+  	constructor(private service: DetailService, private navService: NavService, private router: ActivatedRoute) { }
 
   	ngOnInit() {
+  		this.navService.changeNav("home");
   		this.sub = this.router.params.subscribe(params => {
 		    this.couseId = +params["id"];
 		    this.link = `/detail/${this.couseId}`;

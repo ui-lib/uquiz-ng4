@@ -1,8 +1,8 @@
     <div class="my-container">
         <div class="nav">
-            <a href="/home">首页</a>
+            <a [routerLink]="['/home']">首页</a>
             <span>&gt;</span>
-            <a href="/my">我的</a>
+            <a [routerLink]="['/my']">我的</a>
         </div>
         <div class="center-area">
             <div class="user-avatar-container" *ngIf="teacherInfo != undefined">

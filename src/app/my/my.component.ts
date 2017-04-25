@@ -3,13 +3,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import MyService from "../service/my.service";
+import NavService from "../service/nav.service";
 import Alert from '../Alert';
 
 @Component({
   selector: 'app-my',
   templateUrl: './my.component.html',
   styleUrls: ['./my.component.css'],
-  providers: [MyService]
+  providers: [MyService, NavService]
 })
 export class MyComponent implements OnInit {
 
@@ -20,9 +21,10 @@ export class MyComponent implements OnInit {
 	public phone: string;
 	public university: string;
 
-  	constructor(private service: MyService, private router: Router) { }
+  	constructor(private service: MyService, private navService: NavService, private router: Router) { }
 
   	ngOnInit() {
+      this.navService.changeNav("my");
   		this.init();
   	}
 
