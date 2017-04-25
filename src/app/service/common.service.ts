@@ -16,7 +16,8 @@ declare interface UploadAudioParam {
 @Injectable()
 export default class CommonService {
 
-  	constructor(public http: CoolHttp) {}
+  	constructor(public http: CoolHttp) {
+    }
 
   	public autoLogin() {
   		let openId = sessionStorage.getItem("openId");
@@ -54,9 +55,9 @@ export default class CommonService {
         }));
     }
 
-      public getFileUrl(id: number) {
-          return Config.file(id);
-      }
+    public getFileUrl(id: number) {
+        return Config.file(id);
+    }
 
     public getDate(date: number):string {
         const {formatNumber} = this,

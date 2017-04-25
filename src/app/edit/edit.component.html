@@ -11,6 +11,7 @@
         <div class="title">
             <input class="title-text" [(ngModel)]="title" placeholder="输入标题..." />
         </div>
+        <a href="javascript:;" class="delete-ico" (click)="deleteItems()"></a>
     </div>
     <div class="post-list" id="post-list">
         <div class="split-line" id="split-line"></div>
@@ -30,6 +31,7 @@
                     ></app-player>
                 </div>
             </div>
+            <em class="delete-check" [ngClass]="{'checked': content.checked}" (click)="checkItem(content)"></em>
         </div>
     </div>
     <div class="edit-area">

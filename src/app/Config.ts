@@ -29,6 +29,9 @@ export default class Config {
     //  添加课程内容
     static addContent = `${prefix}/api/teacher/addContent`
 
+    //  删除课程内容
+    static deleteItems = `${prefix}/api/teacher/contents/del`
+
     //  删除课程
     static delCourse = (id) => `${prefix}/api/teacher/delCourse/${id}`
 

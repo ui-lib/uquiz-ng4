@@ -11,7 +11,6 @@ import Alert from '../Alert';
   styleUrls: ['./home.component.css'],
   providers: [HomeService]
 })
-
 export class HomeComponent implements OnInit {
 	@Output() updateNav = new EventEmitter<any>();
 

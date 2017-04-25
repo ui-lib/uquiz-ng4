@@ -61,8 +61,38 @@ export class EditComponent implements OnInit {
 		this._initEvents();
   	}
 
+    checkItem(content) {
+      content.checked = !content.checked;
+    }
+
+    deleteItems() {
+      const { contents } = this,
+          ids = contents.filter((content) => content.checked)
+                .map((content) => content.id);
+      if (!ids.length) {
+        Alert.error({
+          content: "请先选择要删除的项!"
+        });
+        return;
+      }
+      this.service.deleteContents(ids)
+      .then(() => {
+        Alert.success({
+          content: "删除成功!"
+        })
+        .then(() => {
+          location.reload();
+        });
+      })
+      .catch(() => {
+        Alert.error({
+          content: "网络异常,请重试!"
+        });
+      });
+    }
+
   	selectImage(ev: InputEvent) {
-  		this.index = this._getIndex();
+  		this.index = this._findIndex();
   		const {target} = ev,
             file = target.files[0],
             {size} = file,
@@ -96,7 +126,7 @@ export class EditComponent implements OnInit {
   	}
 
   	selectMusic(ev: InputEvent) {
-  	  this.index = this._getIndex();
+  	  this.index = this._findIndex();
       const {target} = ev,
         file = target.files[0],
         {size, name} = file,
@@ -150,8 +180,7 @@ export class EditComponent implements OnInit {
   	}
 
   	addTop(ev: MouseEvent) {
-  		this.index = this._getIndex();
-  		console.log(this.courseId);
+  		this.index = this._findIndex();
   		const {index, contents} = this,
   			content = this.editor.outputContent(),
   			contentParam = {
@@ -169,6 +198,7 @@ export class EditComponent implements OnInit {
 	    	});
 	      return;
   		}
+      console.log(index);
   		this.service.addContent(contentParam, id).then((res) => {
   				this._insertToContents(res, index);
   			})
@@ -273,18 +303,31 @@ export class EditComponent implements OnInit {
     	const {line, parent} = this,
   			{offsetTop} = parent,
             top = Number.parseFloat(line.style.top),
-			nodes = [].slice.call(parent.querySelectorAll(".item"));            
-        let target, topDis, bottomDis, cur, i, length, lineClone;
-		for (i = 0, length = nodes.length; i < length; i++) {
+			      nodes = [].slice.call(parent.querySelectorAll(".item"));
+        let topDis, bottomDis, cur, i, length, lineClone, index;
+      index = 0;
+		  for (i = 0, length = nodes.length; i < length; i++) {
             cur = nodes[i];
             topDis = cur.offsetTop - offsetTop;
             bottomDis = cur.offsetTop + cur.offsetHeight;
             if (bottomDis >= top) {
-                target = cur;
-                return i + 1;
+                index = i + 1;
+                break;
             }
         }
-        return 0;
+        return index;
+    }
+
+    private _findIndex(): number {
+      const {line, parent} = this,
+            nodes = [].slice.call(parent.querySelectorAll(".item"));
+      let i, len;
+      for (i = 0, len = nodes.length; i < len; i ++) {
+        if (nodes[i].isEqualNode(line)) {
+          return i + 1;
+        }
+      }
+      return 0;
     }
 
     private _insertToContents(item, index) {

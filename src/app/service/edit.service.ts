@@ -40,6 +40,13 @@ export default class EditService extends DetailService {
           }));
       }
 
+      public deleteContents(id) {
+          return this.http.postAsync(`${Config.deleteItems}?${qs.stringify({id: id.join(",")})}`, {
+          }, new RequestOptions({
+              withCredentials: true
+          }));
+      }
+
       public submitAtricle({title, contents, courseId, teacherId}) {
           return this.http.postAsync(Config.couseEdit, {
             title, 
