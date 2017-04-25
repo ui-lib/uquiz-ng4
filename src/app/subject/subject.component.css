@@ -102,9 +102,18 @@
 
 .article-title {
     font-size: 18px;
-    height: 18px;
+    height: 40px;
+    line-height: 20px;
+    width: 400px;
     color: #111;
-    padding: 0 0 10px 0;
+    overflow: hidden;
+    display: block;
+    overflow: hidden;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
 }
 
 .time,

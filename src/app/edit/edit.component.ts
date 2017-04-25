@@ -320,11 +320,12 @@ export class EditComponent implements OnInit {
 
     private _findIndex(): number {
       const {line, parent} = this,
-            nodes = [].slice.call(parent.querySelectorAll(".item"));
+            nodes = [].slice.call(parent.querySelectorAll("div"))
+                    .filter((node) => node.parentNode.classList.contains("post-list"));
       let i, len;
       for (i = 0, len = nodes.length; i < len; i ++) {
         if (nodes[i].isEqualNode(line)) {
-          return i + 1;
+          return i;
         }
       }
       return 0;
