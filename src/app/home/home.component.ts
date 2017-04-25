@@ -3,14 +3,13 @@ import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import HomeService from "../service/home.service";
-import NavService from '../service/nav.service';
 import Alert from '../Alert';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  providers: [HomeService, NavService]
+  providers: [HomeService]
 })
 export class HomeComponent implements OnInit {
 	public articles: any;
@@ -18,10 +17,9 @@ export class HomeComponent implements OnInit {
 	private size: number = 29;
 	private type: string = "use";
 
-	constructor(private service: HomeService, private navService: NavService, private router: Router) {}
+	constructor(private service: HomeService, private router: Router) {}
 
 	ngOnInit() {
-		this.navService.changeNav("home");
 		this.service.autoLogin().then(() => {
 			return this.queryList();
 		})

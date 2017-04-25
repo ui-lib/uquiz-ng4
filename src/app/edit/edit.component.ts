@@ -3,7 +3,6 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 
 import EditService from "../service/edit.service";
-import NavService from "../service/nav.service";
 import Alert from "../Alert";
 import DOM from "../DOM";
 
@@ -18,7 +17,7 @@ declare interface InputEvent extends Event {
   selector: "app-edit",
   templateUrl: "./edit.component.html",
   styleUrls: ["./edit.component.css"],
-  providers: [EditService, NavService]
+  providers: [EditService]
 })
 export class EditComponent implements OnInit {
 
@@ -38,10 +37,9 @@ export class EditComponent implements OnInit {
 	@ViewChild(EditorComponent)
 	private editor: EditorComponent;
 
-  	constructor(private service: EditService, private navService: NavService, private router: ActivatedRoute) { }
+  	constructor(private service: EditService, private router: ActivatedRoute) { }
 
   	ngOnInit() {
-      this.navService.changeNav("home");
 		  this.sub = this.router.params.subscribe(params => {
 			this.courseId = +params["id"];
       this.link = `/edit/${this.courseId}`;

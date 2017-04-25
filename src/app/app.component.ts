@@ -1,24 +1,18 @@
 import { Component } from '@angular/core';
-import {Subscription} from 'rxjs/Subscription';
-import NavService from './service/nav.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [NavService]
+  providers: []
 })
 export class AppComponent {
-    private nav: string;
-    private subscription: Subscription;
+    private nav: string = "home";
 
-	  constructor(private navService: NavService) {
-      this.subscription = this.navService.nav.subscribe((nav) => {
-        this.nav = nav;
-      });
+	  constructor() {
 	  }
 
-    ngOnDestroy() {
-      this.subscription.unsubscribe();
+    changeNav(nav: string) {
+      this.nav = nav;
     }
 }

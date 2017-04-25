@@ -3,15 +3,15 @@
         <div class="header-center">
             <a [routerLink]="['/']" class="site-logo"></a>
             <div class="menus">
-                <span class="menu-item home" [ngClass]="{'active': nav == 'home'}">
+                <span (click)="changeNav('home')" class="menu-item home" [ngClass]="{'active': nav == 'home'}">
                     <a [routerLink]="['/home']">首页</a>
                     <em class="bottom-line"></em>
 	            </span>
-                <span class="menu-item subject" [ngClass]="{'active': nav == 'subject'}">
+                <span (click)="changeNav('subject')" class="menu-item subject" [ngClass]="{'active': nav == 'subject'}">
 	                    <a [routerLink]="['/subject']">课程</a>
 	                    <em class="bottom-line"></em>
 	                </span>
-                <span class="menu-item my" [ngClass]="{'active': nav == 'my'}">
+                <span (click)="changeNav('my')" class="menu-item my" [ngClass]="{'active': nav == 'my'}">
 	                    <a [routerLink]="['/my']">我的</a>
 	                    <em class="bottom-line"></em>
 	                </span>
