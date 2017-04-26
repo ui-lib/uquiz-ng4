@@ -7,11 +7,6 @@ import { EditorComponent } from "../editor/editor.component";
 
 import Alert from '../Alert';
 
-//  input change事件参数
-declare interface InputEvent extends Event {
-	target: HTMLInputElement & EventTarget;
-}
-
 @Component({
   	selector: 'app-publish',
   	templateUrl: './publish.component.html',
@@ -57,9 +52,8 @@ export class PublishComponent implements OnInit {
   		});
   	}
 
-  	selectImage(ev: InputEvent) {
-  		const {target} = ev,
-            file = target.files[0],
+  	selectImage(files: FileList) {
+  		const file = files[0],
             {size} = file;
             if (size > 1024 * 1024 * 5) {
             	Alert.warn({
@@ -88,9 +82,8 @@ export class PublishComponent implements OnInit {
         });
   	}
 
-  	selectMusic(ev: InputEvent) {
-      const {target} = ev,
-        file = target.files[0],
+  	selectMusic(files: FileList) {
+      const file = files[0],
         {size, name} = file;
       let audio = new Audio(), duration;
       audio.src = URL.createObjectURL(file);

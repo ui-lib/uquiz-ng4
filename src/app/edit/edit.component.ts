@@ -8,11 +8,6 @@ import DOM from "../DOM";
 
 import { EditorComponent } from "../editor/editor.component";
 
-//  input change事件参数
-declare interface InputEvent extends Event {
-	target: HTMLInputElement & EventTarget;
-}
-
 @Component({
   selector: "app-edit",
   templateUrl: "./edit.component.html",
@@ -93,10 +88,9 @@ export class EditComponent implements OnInit {
       });
     }
 
-  	selectImage(ev: InputEvent) {
+  	selectImage(files: FileList) {
   		this.index = this._findIndex();
-  		const {target} = ev,
-            file = target.files[0],
+  		const file = files[0],
             {size} = file,
             {index, contents} = this,
             id = index <= contents.length ? contents[index].id : 0;
@@ -127,10 +121,9 @@ export class EditComponent implements OnInit {
         });
   	}
 
-  	selectMusic(ev: InputEvent) {
+  	selectMusic(files: FileList) {
   	  this.index = this._findIndex();
-      const {target} = ev,
-        file = target.files[0],
+      const file = files[0],
         {size, name} = file,
         {index, contents} = this,
         id = index <= contents.length ? contents[index].id : 0;

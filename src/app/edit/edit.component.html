@@ -40,10 +40,10 @@
         </div>
         <div class="fn-btn-group">
             <span class="upload-image">
-                    <input type="file" accept="image/png,image/gif,image/jpeg,audio/mpeg" (change)="selectImage($event)"/>
+                    <input type="file" accept="image/png,image/gif,image/jpeg,audio/mpeg" (change)="selectImage($event.target.files)"/>
                 </span>
             <span class="upload-music">
-                    <input type="file" (change)="selectMusic($event)"/>
+                    <input type="file" (change)="selectMusic($event.target.files)"/>
                 </span>
             <span class="blod-text" (click)="changeFontStyle($event)"></span>
             <span class="add-top" (click)="addTop($event)">加上去</span>
