@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
 
 	constructor(private service: HomeService, private router: Router) {}
 
-	ngOnInit() {
+	async ngOnInit() {
 		this.service.autoLogin().then(() => {
 			return this.queryList();
 		})

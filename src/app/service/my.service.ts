@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { RequestOptions } from '@angular/http';
 import { CoolHttp } from 'angular2-cool-http';
 
 import qs from "qs";
@@ -34,9 +33,7 @@ export default class MyService extends CommonService {
 	}
 
   	public modify(info: saveInfoParam) {
-  		return this.http.postAsync(Config.modify, info, new RequestOptions({
-  			withCredentials: true
-  		}));
+  		return this.http.postAsync(Config.modify, info);
   	}
 }
 

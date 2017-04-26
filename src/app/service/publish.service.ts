@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { RequestOptions } from '@angular/http';
 import { CoolHttp } from 'angular2-cool-http';
 
 import qs from "qs";
@@ -32,16 +31,12 @@ export default class PublishService extends CommonService {
 
       //    新建一篇文章获取id
       public autoNewArticle() {
-          return this.http.getAsync(`${Config.course(0)}`, new RequestOptions({
-              withCredentials: true
-          }));
+          return this.http.getAsync(`${Config.course(0)}`);
       }
 
       //    上传内容
       public addContent(param: AddContentParam) {
-          return this.http.postAsync(Config.addContent, param, new RequestOptions({
-              withCredentials: true
-          }));
+          return this.http.postAsync(Config.addContent, param);
       }
 
       public submitAtricle({title, contents, courseId, teacherId}) {
@@ -52,9 +47,7 @@ export default class PublishService extends CommonService {
             teacherId,
             id: courseId,
             status: "ENABLED"
-          }, new RequestOptions({
-              withCredentials: true
-          }));        
+          });        
       }
 }
 

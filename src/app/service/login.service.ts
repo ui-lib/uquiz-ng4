@@ -13,8 +13,6 @@ export default class LoginService {
 	constructor(private http: CoolHttp) {}
 
   	public getErCodeURI() {
-  		return this.http.getAsync(Config.scanView, new RequestOptions({
-    		withCredentials: true
-    	}));
+  		return this.http.getAsync(Config.scanView);
   	}
 }

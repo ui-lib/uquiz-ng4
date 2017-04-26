@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { RequestOptions } from '@angular/http';
 import { CoolHttp } from 'angular2-cool-http';
 
 import qs from "qs";
@@ -20,9 +19,7 @@ export default class SubjectService extends HomeService {
 	}
 
   	public deleteCourse(id: number) {
-  		return this.http.postAsync(Config.delCourse(id), {}, new RequestOptions({
-  			withCredentials: true
-  		}));
+  		return this.http.postAsync(Config.delCourse(id), {});
   	}
 }
 

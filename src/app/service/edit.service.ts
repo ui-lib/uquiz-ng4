@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { RequestOptions } from '@angular/http';
 import { CoolHttp } from 'angular2-cool-http';
 
 import qs from "qs";
@@ -35,16 +34,12 @@ export default class EditService extends DetailService {
           if (id) {
             url = `${url}?${qs.stringify({id})}`;
           }
-          return this.http.postAsync(Config.addContent, param, new RequestOptions({
-              withCredentials: true
-          }));
+          return this.http.postAsync(Config.addContent, param);
       }
 
       public deleteContents(id) {
           return this.http.postAsync(`${Config.deleteItems}?${qs.stringify({id: id.join(",")})}`, {
-          }, new RequestOptions({
-              withCredentials: true
-          }));
+          });
       }
 
       public submitAtricle({title, contents, courseId, teacherId}) {
@@ -55,9 +50,7 @@ export default class EditService extends DetailService {
             teacherId,
             id: courseId,
             status: "ENABLED"
-          }, new RequestOptions({
-              withCredentials: true
-          }));        
+          });        
       }
 }
 

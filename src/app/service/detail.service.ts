@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { RequestOptions } from '@angular/http';
 import { CoolHttp } from 'angular2-cool-http';
 
 import qs from "qs";
@@ -20,9 +19,7 @@ export default class DetailService extends CommonService {
     }
 
     public queryDetail(id: number) {
-       return this.http.getAsync(Config.courseDetail(id), new RequestOptions({
-           withCredentials: true
-       }));
+       return this.http.getAsync(Config.courseDetail(id));
     }
 }
 

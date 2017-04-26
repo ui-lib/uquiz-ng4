@@ -31,9 +31,7 @@ export default class HomeService extends CommonService {
 	}
 
   	queryList(param: QueryListParam) {
-  		return this.http.getAsync(`${Config.listCourse}?${qs.stringify(param)}`, new RequestOptions({
-          withCredentials: true
-      }));
+  		return this.http.getAsync(`${Config.listCourse}?${qs.stringify(param)}`);
   	}
 
   	organizeContent(content: any[]) {

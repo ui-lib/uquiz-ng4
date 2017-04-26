@@ -17,19 +17,16 @@ declare interface UploadAudioParam {
 export default class CommonService {
 
   	constructor(public http: CoolHttp) {
+        this.http.setWithCredentials(true);
     }
 
   	public autoLogin() {
   		let openId = sessionStorage.getItem("openId");
-		return this.http.postAsync(`${Config.login}?${qs.stringify({openId})}`, "", new RequestOptions({
-            withCredentials: true
-        }));
+		return this.http.postAsync(`${Config.login}?${qs.stringify({openId})}`, "");
   	}
 
     public queryTeacherInfo() {
-        return this.http.getAsync(Config.teacherInfo, new RequestOptions({
-            withCredentials: true
-        }));
+        return this.http.getAsync(Config.teacherInfo);
     }
 
     public upload(file: File) {
@@ -38,9 +35,7 @@ export default class CommonService {
         form.append("space", "uquiz_image");
         form.append("owner", "-1");
         form.append("name", "-1");
-        return this.http.postAsync(Config.upload, form, new RequestOptions({
-            withCredentials: true
-        }));
+        return this.http.postAsync(Config.upload, form);
     }
 
     public uploadAudio(param: UploadAudioParam) {
@@ -50,9 +45,7 @@ export default class CommonService {
         form.append("space", "uquiz_video");
         form.append("owner", "-1");
         form.append("name", "-1");
-        return this.http.postAsync(Config.upload, form, new RequestOptions({
-            withCredentials: true
-        }));
+        return this.http.postAsync(Config.upload, form);
     }
 
     public getFileUrl(id: number) {
