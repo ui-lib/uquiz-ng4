@@ -19,6 +19,7 @@ export class AppComponent {
           afterResponseAsync: (url, method, data, headers) => {
               let { _body } = url;
               return new Promise((resolve, reject) => {
+                  resolve();
                   if (_body) {
                     _body = JSON.parse(_body);
                     const { code, message } = _body;
@@ -28,11 +29,7 @@ export class AppComponent {
                       }).then(() => {
                         this.router.navigate(["/"]);
                       });
-                    } else {
-                      resolve();
                     }
-                  } else {
-                    resolve();
                   }
               });
           }
